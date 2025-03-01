@@ -22,11 +22,11 @@ app.get('/stocks/all',async(req,res)=>{
     try {
         const response=await axios.get(`${FINNHUB_BASE_URL}/stock/symbol`,{
             params:{ exchange, token:FINNHUB_API_KEY }, 
-            headers:{'X-Finnhub-Token':FINNHUB_API_KEY }
+            headers:{'X-Finnhub-Token':FINNHUB_API_KEY}
         });
         res.json(response.data);
     } catch (error) {
-        res.status(501).json({message:'Failed to fetch stocks list from Finnhub',details:error.response?.data || error.message});
+        res.status(500).json({message:'Failed to fetch stocks list from Finnhub',details:error.response?.data || error.message});
     }
 })
 
@@ -41,7 +41,7 @@ app.get('/stocks/:symbol',async(req,res)=>{
         });
         res.json(response.data);
     } catch (error) {
-        res.status(502).json({message:'Failed to fetch stock by symbol',details:error.response?.data || error.message});
+        res.status(500).json({message:'Failed to fetch stock by symbol',details:error.response?.data || error.message});
 
     }
 })
